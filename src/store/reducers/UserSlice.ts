@@ -25,14 +25,14 @@ const initialState: UserState = {
 
 export const fetchUsers = createAsyncThunk(
   'user/fetchAll',
-  async (_, thunkAPI) => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get<IUser[]>(
-        'https://jsonplaceholder.typicode.com/users'
+        'https://jsonplaceholder.typicode.com/users?_limit=2'
       );
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue('Could not load data');
+      return rejectWithValue('Could not load data');
     }
   }
 );
